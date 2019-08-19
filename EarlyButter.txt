@@ -1,0 +1,49 @@
+%tryFunc FNCHBT
+function [AMPL,PH,PH2] = GetButter(nw, FLAG)
+
+if FLAG == "bandpass" || FLAG == "stop"
+        ws = nchoosek((0.2:0.05:0.8),2);
+        N = size(ws,1);
+end
+if FLAG == "low" || FLAG == "high"
+        ws = linspace(0.05,0.95,N);
+end
+    
+for i = 1:length(ws)
+    if FLAG == "bandpass" || FLAG == "stop"
+       [alb,blb] = butter(1,[ws(i,1) ws(i,2)],FLAG);
+    end
+     if FLAG == "low" || FLAG == "high"
+        [alb,blb] = butter(2,ws(i),FLAG);
+     end
+   for j = 1:3
+      Ka(i,j) = alb(j);
+      Kb(i,j) = blb(j);
+   end
+end
+
+al = [Ka(nw,1) Ka(nw,2) Ka(nw,3)];
+bl = [Kb(nw, 1) Kb(nw, 2) Kb(nw, 3)];
+[hl,w] = freqz(al,bl,200);
+aml = abs(hl);
+phal = angle(hl);
+
+
+
+%Calculating F2
+for i=1:length(w)
+    CF1(i)=(bl(2)*(al(1)-al(3))-al(2)*(1-bl(3)))*sin(w(i));
+    CF2(i)=(al(1)*bl(3)-al(3))*sin(2*w(i));
+    IF(i)=CF1(i)+CF2(i);
+    ZF1(i)=al(1)+al(2)*bl(2)+al(3)*bl(3);
+    ZF2(i)=(bl(2)*(al(1)+al(3))+al(2)*(1+bl(3)))*cos(w(i));
+    ZF3(i)=(al(1)*bl(3)+al(3))*cos(2*w(i));
+    RF(i)=ZF1(i)+ZF2(i)+ZF3(i);
+    F2(i)=atan2(IF(i),RF(i));    
+end
+
+AMPL = aml;
+PH = phal;
+PH2 = F2;
+end
+    
