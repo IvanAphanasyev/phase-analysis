@@ -12,7 +12,7 @@ global ws;
 ws = sortByDiff(nchoosek((0.2:0.01:0.8),2));%from 0.2 to 0.8 with step 0.05 Count = 78;
 str = ws;
 N = size(ws,1);
-%ws = filtRange(ws,0.05);
+ws = filtRange(ws,0.05);
 target = GetStrip([0.2, 0.3],'bs'); amplifier(points,size(ws,1)) = 0; phase(points,size(ws,1)) = 0;
 for i = 1: size(ws,1)
     
@@ -53,5 +53,3 @@ figure;
 plot(phaseValues(:,5))
 figure
 plot(phaseValues(:,4)+phaseValues(:,5));
-figure
-plot([phaseValues(:,4),phaseValues(:,1)]);
