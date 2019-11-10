@@ -1,17 +1,10 @@
-function [AMPL,PH,PH2] = GetCh2(Fc,RS,FLAG)
+function [endPhase, preEndPhase, numenator, denumenator] = ch2Arguments(Fc,RS,FLAG)
 global points;
-if FLAG == "bandpass" || FLAG == "stop"
-    [alb,blb] = cheby2(2,RS,[Fc(1) Fc(2)],FLAG);
-elseif FLAG == "low" || FLAG == "high"
+
     [alb,blb] = cheby2(2,RS,Fc(1),FLAG);
-else
-    error("Invalid string input flag in GetCh2(low, high, bandpass, stop)");
-end
 
 [hl,w] = freqz(alb,blb,points);
-aml = abs(hl);
-phal = angle(hl);
-
+%Calculating F2
 for i=1:length(w)
     CF1(i)=(blb(2)*(alb(1)-alb(3))-alb(2)*(1-blb(3)))*sin(w(i));
     CF2(i)=(alb(1)*blb(3)-alb(3))*sin(2*w(i));
@@ -20,11 +13,14 @@ for i=1:length(w)
     ZF2(i)=(blb(2)*(alb(1)+alb(3))+alb(2)*(1+blb(3)))*cos(w(i));
     ZF3(i)=(alb(1)*blb(3)+alb(3))*cos(2*w(i));
     RF(i)=ZF1(i)+ZF2(i)+ZF3(i);
-    F2(i)=atan2(IF(i),RF(i));    
+    preF2(i) = IF(i)/RF(i);
+    F2(i)=atan2(IF(i),RF(i));  
 end
 
-AMPL = aml;
-PH = phal;
-PH2 = F2';
-end
+endPhase = F2;
+preEndPhase = preF2;
+numenator = IF;
+denumenator = RF;
 
+end
+    

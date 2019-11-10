@@ -42,12 +42,13 @@ end
 grid;
 
 subplot(3,1,2);
-P2 = plot(w,F2,w,ButterPha);
+P2 = plot(w,F2);%,w,ButterPha);
 title('F2');
 line([wsX(1) wsX(1)],[max(F2),min(F2)],'Color','red');
 if string == "bandpass" || string == "stop"
     line([centre centre], [min(phal) max(phal)],'Color','m');
     line([wsX(2) wsX(2)],[min(phal) max(phal)],'Color','red');
+    line([1 1], [-3.14 3.14],'Color','red');
 end
 
 grid ;
@@ -56,9 +57,10 @@ P3 = plot(w,phal,w,ButterPha);
 title('PHAL');
 line([wsX(1) wsX(1)],[max(phal),min(phal)],'Color','red');
 if string == "bandpass" || string == "stop"
-    %(wsX(1) + wsX(2))/2;
+    %(wsX(1) + wsX(2))/2;       
     line([centre centre], [min(phal) max(phal)]);
     line([wsX(2) wsX(2)],[min(phal) max(phal)],'Color','red');
+    
 end
 grid ;
 V32 = {'-','-.'}';NameArray = {'LineStyle'};

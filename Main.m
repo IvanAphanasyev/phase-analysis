@@ -2,12 +2,12 @@
 %clc; clear all; close all;
 %%Global constans
 global N; %Counts of Fc for low or high filts
-global points; points = 500; %Counts calulated points for filters any type
+global points; points = 10000; %Counts calulated points for filters any type
 global ws;
 %%Input variables
 string = "low"; % low, high, stop, bandpass
-typeFilter = 3;
-peak_to_peak = [5 8];
+typeFilter = 2;
+peak_to_peak = [1 8];
 %% TF
 filter_calculate = 1;%TRUE = 1, FALSE = 0; 
 showGraph = 1;%TRUE = 1, FALSE = 0; 
@@ -22,7 +22,7 @@ if showGraph == 1
     elseif string == "low" || string == "high"
         N = 91;
         ws = linspace(0.05,0.95,N)';
-        numberGraphShow = GetStrip(0.5,'lh');% What a graph will shown; 
+        numberGraphShow = GetStrip(0.3,'lh');% What a graph will shown; 
     else
         error("Invalid string input flag in Main(low, high, bandpass, stop)");
     end
