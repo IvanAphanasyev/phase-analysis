@@ -7,7 +7,7 @@ global ws; ws = linspace(0.05,0.95,N)';
 w  = linspace(0, 1 - (1/points), points);% 
 %% options
 string = "low"; % low, high
-typeFilter = 3;
+typeFilter = 2;
 % 1 - butter
 % 2 - cheby1
 % 3 - cheby2

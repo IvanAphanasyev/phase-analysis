@@ -2,7 +2,7 @@
 %clc; clear all; close all;
 %%Global constans
 global N; %Counts of Fc for low or high filts
-global points; points = 10000; %Counts calulated points for filters any type
+global points; points = 1000; %Counts calulated points for filters any type
 global ws;
 %%Input variables
 string = "low"; % low, high, stop, bandpass
@@ -10,8 +10,8 @@ typeFilter = 2;
 peak_to_peak = [1 8];
 %% TF
 filter_calculate = 1;%TRUE = 1, FALSE = 0; 
-showGraph = 1;%TRUE = 1, FALSE = 0; 
-SearchPh = 0;%TRUE = 1, FALSE = 0; 
+showGraph = 0;%TRUE = 1, FALSE = 0; 
+SearchPh = 1;%TRUE = 1, FALSE = 0; 
  
 %% SG
 if showGraph == 1
@@ -29,14 +29,14 @@ if showGraph == 1
 end
 %% FC
 if filter_calculate == 1
-    [A_Amplitude, A_Phase, A_DecimalPhase] = GetMatrix(typeFilter,peak_to_peak,string);
+    [A_Amplitude, A_Phase, A_DecimalPhase] = getMatrix(typeFilter,peak_to_peak,string);
 end
 %% SP
 if SearchPh == 1
     %REWRITE IT
     Pulsation = [1,2,3]; % 
     [SearchedApl, SearchedF2] = Ch1SearchPh(Pulsation,typeFilter,string);
-    z = DrawPhs(SearchedApl);%
+    DrawPhs(SearchedApl, 'wc', '12');%
     clear Pulsation;
 end
 %% SG
