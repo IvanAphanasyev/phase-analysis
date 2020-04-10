@@ -157,7 +157,7 @@ for i = 1:length
    
     model(i)=tanh(argument(i));
     sincos(i) =  sin(i)/cos(i);
-% end
+end
 figure('Units', 'normalized', 'OuterPosition', [0 0 1 1]);
 plot(pi * sincos);
 hold on;
