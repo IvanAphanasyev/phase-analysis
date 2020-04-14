@@ -6,7 +6,7 @@ global points; points = 1000; %Counts calulated points for filters any type
 global ws;
 %%Input variables
 string = "low"; % low, high, stop, bandpass
-typeFilter = 2;
+typeFilter = 4;
 peak_to_peak = [1 8];
 %% TF
 filter_calculate = 1;%TRUE = 1, FALSE = 0; 

@@ -1,7 +1,7 @@
 function [returned] = AnalysEllipQ(StartRP, RangeRP, RangeRS,FLAG)
 
 N = 91;
- ws = linspace(0.05,0.95,N);
+ws = linspace(0.05,0.95,N);
  
 
 for x = StartRP:StartRP + RangeRP - 1
